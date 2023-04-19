@@ -1,0 +1,12 @@
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\bin\Debug\net5.0\WizLib_Models.deps.json
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\bin\Debug\net5.0\WizLib_Models.dll
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\bin\Debug\net5.0\WizLib_Models.pdb
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\obj\Debug\net5.0\WizLib_Models.csproj.AssemblyReference.cache
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\obj\Debug\net5.0\WizLib_Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\obj\Debug\net5.0\WizLib_Models.AssemblyInfoInputs.cache
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\obj\Debug\net5.0\WizLib_Models.AssemblyInfo.cs
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\obj\Debug\net5.0\WizLib_Models.csproj.CoreCompileInputs.cache
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\obj\Debug\net5.0\WizLib_Models.dll
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\obj\Debug\net5.0\refint\WizLib_Models.dll
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\obj\Debug\net5.0\WizLib_Models.pdb
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib_Models\obj\Debug\net5.0\ref\WizLib_Models.dll
