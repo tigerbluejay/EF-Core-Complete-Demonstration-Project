@@ -37,11 +37,11 @@ namespace WizLib_Models.Models
         // the database but its a good idea to add it apart from the Category Category property
         // above.
         [ForeignKey("Category")]
-        public int Category_Id { get; set; }
+        public int? Category_Id { get; set; }
 
         public BookDetail BookDetail { get; set; }
         [ForeignKey("BookDetail")]
-        public int BookDetail_Id { get; set; }
+        public int? BookDetail_Id { get; set; }
 
         public Publisher Publisher { get; set; }
         [ForeignKey("Publisher")]

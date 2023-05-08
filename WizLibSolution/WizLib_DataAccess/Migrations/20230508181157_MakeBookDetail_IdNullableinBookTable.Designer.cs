@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WizLib_DataAccess.Data;
 
 namespace WizLib_DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230508181157_MakeBookDetail_IdNullableinBookTable")]
+    partial class MakeBookDetail_IdNullableinBookTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,7 +57,7 @@ namespace WizLib_DataAccess.Migrations
                     b.Property<int?>("BookDetail_Id")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Category_Id")
+                    b.Property<int>("Category_Id")
                         .HasColumnType("int");
 
                     b.Property<string>("ISBN")
@@ -304,7 +306,9 @@ namespace WizLib_DataAccess.Migrations
 
                     b.HasOne("WizLib_Models.Models.Category", "Category")
                         .WithMany()
-                        .HasForeignKey("Category_Id");
+                        .HasForeignKey("Category_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("WizLib_Models.Models.Publisher", "Publisher")
                         .WithMany("Books")

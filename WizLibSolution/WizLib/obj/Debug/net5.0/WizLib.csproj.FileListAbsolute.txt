@@ -159,3 +159,10 @@ C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizL
 C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\Razor\Views\Publisher\Index.cshtml.g.cs
 C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\Razor\Views\Publisher\Upsert.cshtml.g.cs
 C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\Razor\Views\Book\Index.cshtml.g.cs
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\bin\Debug\net5.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\bin\Debug\net5.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\bin\Debug\net5.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\WizLib.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\Razor\Views\Book\Upsert.cshtml.g.cs
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\Razor\Views\Book\Details.cshtml.g.cs
