@@ -166,3 +166,4 @@ C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizL
 C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\WizLib.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\Razor\Views\Book\Upsert.cshtml.g.cs
 C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\Razor\Views\Book\Details.cshtml.g.cs
+C:\Users\josem\source\Large Projects\EF Core Complete Demonstration Project\WizLibSolution\WizLib\obj\Debug\net5.0\Razor\Views\Book\ManageAuthors.cshtml.g.cs

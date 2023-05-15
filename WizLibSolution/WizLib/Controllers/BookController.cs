@@ -21,20 +21,31 @@ namespace WizLib.Controllers
         public IActionResult Index()
         {
             // List<Book> objList = _db.Books.ToList();
+           
             // this is the third most efficient way to call - it's called eager loading
             // it makes fewest calls to the database (eager loading)
-            List<Book> objList = _db.Books.Include(u => u.Publisher).ToList();
+            List<Book> objList = _db.Books.Include(u => u.Publisher)
+                .Include(u => u.BookAuthors).ThenInclude(u => u.Author).ToList();
+            // we use ThenInclude to include Author objects inside BookAuthors
+
+
             //foreach (var obj in objList)
             //{
             //    // this is one way to load publishers - least efficient
             //    //obj.Publisher = _db.Publishers.FirstOrDefault(u => u.Publisher_Id == obj.Publisher_Id);
-                
+
             //    // this will also load all the publishers but its more efficient
             //    // this is called Explicit Loading - more efficient
             //    _db.Entry(obj).Reference(u => u.Publisher).Load();
+            //    _db.Entry(obj).Collection(u => u.BookAuthors).Load(); // we use
+            //    // collection method because bookAuthors is an IEnumerable inside the Book obj
+
+            //    foreach(var bookAuth in obj.BookAuthors)
+            //    {
+            //        _db.Entry(bookAuth).Reference(u => u.Author).Load();
+            //    }
 
             //}
-
 
             return View(objList);
         }
@@ -137,6 +148,63 @@ namespace WizLib.Controllers
             _db.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult ManageAuthors(int id)
+        {
+            BookAuthorViewModel obj = new BookAuthorViewModel()
+            {
+                BookAuthorList = _db.BookAuthors.Include(u => u.Author).Include(u => u.Book)
+                    .Where(u => u.Book_Id == id).ToList(),
+                BookAuthor = new BookAuthor()
+                {
+                    Book_Id = id
+                },
+                // Although we include Books in the BookAuthorList object
+                // we also need to have this separate book object for loading
+                // the specific book.
+                Book = _db.Books.FirstOrDefault(u => u.Book_Id == id)
+            };
+
+            List<int> tempListofAssignedAuthors = obj.BookAuthorList.Select(u => u.Author_Id).ToList();
+            // NO IN clause in LINQ
+            // get all the authors whose id is not in tempListofAssignedAuthors
+            var tempList = _db.Authors.Where(u => !tempListofAssignedAuthors.Contains(u.Author_Id)).ToList();
+
+            // load into the AuthorList the Name and Id of authors who have been filtered
+            obj.AuthorList = tempList.Select(i => new SelectListItem
+            {
+                Text = i.FullName,
+                Value = i.Author_Id.ToString()
+            });
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        public IActionResult ManageAuthors(BookAuthorViewModel bookAuthorViewModel)
+        {
+            if(bookAuthorViewModel.BookAuthor.Book_Id != 0 && bookAuthorViewModel.BookAuthor.Author_Id != 0)
+            {
+                _db.BookAuthors.Add(bookAuthorViewModel.BookAuthor);
+                _db.SaveChanges();
+            }
+            return RedirectToAction(nameof(ManageAuthors), new { @id = bookAuthorViewModel.BookAuthor.Book_Id });   
+
+        }
+
+        [HttpPost]
+        public IActionResult RemoveAuthors(int authorId, BookAuthorViewModel bookAuthorViewModel) 
+        {
+            int bookId = bookAuthorViewModel.Book.Book_Id;
+            BookAuthor bookAuthor = _db.BookAuthors.FirstOrDefault(
+                u => u.Author_Id == authorId && u.Book_Id == bookId);
+
+            _db.BookAuthors.Remove(bookAuthor);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(ManageAuthors), new { @id = bookId}); 
+        }
+
 
         public IActionResult PlayGround()
         {
