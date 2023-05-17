@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +20,14 @@ namespace WizLib.Controllers
         public IActionResult Index()
         {
             List<Category> objList = _db.Categories.ToList();
+            // we could set any query to AsNoTracking() and this would
+            // positively impact performance, but with AsNoTracking() you
+            // would not be tracking changes in the object, so the statues
+            // of Added, Modified, Unchanged and Deleted (and Detached) would
+            // not be tracked and so you wouldn't be able to persist it to the db
+            // use AsNoTracking() when you want to work ReadOnly and positively Impact performance
+            //List<Category> objList = _db.Categories.AsNoTracking().ToList();
+
             return View(objList);
         }
 

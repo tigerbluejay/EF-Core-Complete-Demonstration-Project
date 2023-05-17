@@ -36,6 +36,8 @@ namespace WizLib_DataAccess.Data
 
         // fluent api can do some things data annotations cannot
         // for example defining a composite class for BookAuthor
+
+        public DbSet<BookDetailsFromView> BookDetailsFromView { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -93,7 +95,8 @@ namespace WizLib_DataAccess.Data
                 .HasOne(x => x.FluentAuthor)
                 .WithMany(x => x.FluentBookAuthors).HasForeignKey(x => x.FluentAuthor_Id);
 
-
+            // HasNoKey will never be tracked so we don't have to use AsNoTracking()
+            modelBuilder.Entity<BookDetailsFromView>().HasNoKey().ToView("GetOnlyBookDetails");
         }
     }
 }

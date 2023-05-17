@@ -208,79 +208,104 @@ namespace WizLib.Controllers
 
         public IActionResult PlayGround()
         {
-            //// execution (translation to sql query) will happen when
-            //// you can a method such as Count() Single() FirstOrDefault()
-            //var bookTemp = _db.Books.FirstOrDefault();
-            //bookTemp.Price = 100;
+            ////// execution (translation to sql query) will happen when
+            ////// you can a method such as Count() Single() FirstOrDefault()
+            ////var bookTemp = _db.Books.FirstOrDefault();
+            ////bookTemp.Price = 100;
 
-            //var bookCollection = _db.Books;
-            //double totalPrice = 0;
+            ////var bookCollection = _db.Books;
+            ////double totalPrice = 0;
 
-            //// or when we iterate through a collection
-            //foreach (var book in bookCollection)
-            //{
-            //    totalPrice += book.Price;
-            //}
+            ////// or when we iterate through a collection
+            ////foreach (var book in bookCollection)
+            ////{
+            ////    totalPrice += book.Price;
+            ////}
 
-            //// or when we convert toList toArray or toDictionary
-            //var bookList = _db.Books.ToList();
-            //foreach (var book in bookList)
-            //{
-            //    totalPrice += book.Price;
-            //}
+            ////// or when we convert toList toArray or toDictionary
+            ////var bookList = _db.Books.ToList();
+            ////foreach (var book in bookList)
+            ////{
+            ////    totalPrice += book.Price;
+            ////}
 
-            //var bookCollection2 = _db.Books;
-            //// execution here too:
-            //var bookCount1 = bookCollection2.Count();
+            ////var bookCollection2 = _db.Books;
+            ////// execution here too:
+            ////var bookCount1 = bookCollection2.Count();
 
-            //var bookCount2 = _db.Books.Count();
+            ////var bookCount2 = _db.Books.Count();
 
-            // difference between IEnumerable and IQueryable
-            // IQueryable will filter in the SQL Query, IEnumerable will filter in memory after
-            // fetching all the records. So IQueryable is preferable for performance issues
-            // when filtering data.
+            //// difference between IEnumerable and IQueryable
+            //// IQueryable will filter in the SQL Query, IEnumerable will filter in memory after
+            //// fetching all the records. So IQueryable is preferable for performance issues
+            //// when filtering data.
 
-            // now introducing IQueryable and IEnumerable
-            IEnumerable<Book> BookList1 = _db.Books;
-            var FilteredBook1 = BookList1.Where(b => b.Price > 500).ToList();
-            // the query returns all books, but filtering happens in memory afterwards
+            //// now introducing IQueryable and IEnumerable
+            //IEnumerable<Book> BookList1 = _db.Books;
+            //var FilteredBook1 = BookList1.Where(b => b.Price > 500).ToList();
+            //// the query returns all books, but filtering happens in memory afterwards
 
-            IQueryable<Book> BookList2 = _db.Books;
-            var FilteredBook2 = BookList1.Where(b => b.Price > 500).ToList();
-            // the query returns just the books where price is greater than 500
+            //IQueryable<Book> BookList2 = _db.Books;
+            //var FilteredBook2 = BookList1.Where(b => b.Price > 500).ToList();
+            //// the query returns just the books where price is greater than 500
 
-            // When we want to filter our data it is best to use IQueryable
+            //// When we want to filter our data it is best to use IQueryable
 
-            ////// this is how we manually alter the state of an entity
-            ////// this is not a common scenario
-            ////var category = _db.Categories.FirstOrDefault();
-            ////_db.Entry(category).State = EntityState.Modified;
-            ////_db.SaveChanges();
-
-
-
-            // Updating Related Data
-            var bookTemp1 = _db.Books.Include(b => b.BookDetail).FirstOrDefault(b => b.Book_Id == 4);
-            bookTemp1.BookDetail.NumberOfChapters = 2222;
-            _db.Books.Update(bookTemp1);
-            _db.SaveChanges();
-            // When you update it updates BookDetails, but it also updates Book
-
-            var bookTemp2 = _db.Books.Include(b => b.BookDetail).FirstOrDefault(b => b.Book_Id == 4);
-            bookTemp2.BookDetail.Weight = 3333;
-            _db.Books.Attach(bookTemp2);
-            _db.SaveChanges();
-            // When you attach it executes the update only on BookDetails, it won't update the rest
-            // of the book entity
-
-            // Attach puts all the entities in the graph in the unchanged state
-            // Update puts all the entities in the graph in the modified state
+            //////// this is how we manually alter the state of an entity
+            //////// this is not a common scenario
+            //////var category = _db.Categories.FirstOrDefault();
+            //////_db.Entry(category).State = EntityState.Modified;
+            //////_db.SaveChanges();
 
 
-            // You can also set manually the entity state in modified state 
 
+            //// Updating Related Data
+            //var bookTemp1 = _db.Books.Include(b => b.BookDetail).FirstOrDefault(b => b.Book_Id == 4);
+            //bookTemp1.BookDetail.NumberOfChapters = 2222;
+            //_db.Books.Update(bookTemp1);
+            //_db.SaveChanges();
+            //// When you update it updates BookDetails, but it also updates Book
+
+            //var bookTemp2 = _db.Books.Include(b => b.BookDetail).FirstOrDefault(b => b.Book_Id == 4);
+            //bookTemp2.BookDetail.Weight = 3333;
+            //_db.Books.Attach(bookTemp2);
+            //_db.SaveChanges();
+            //// When you attach it executes the update only on BookDetails, it won't update the rest
+            //// of the book entity
+
+            //// Attach puts all the entities in the graph in the unchanged state
+            //// Update puts all the entities in the graph in the modified state
+
+
+            //// You can also set manually the entity state in modified state 
+
+            // VIEWS
+            var viewList = _db.BookDetailsFromView.ToList();
+            var viewList2 = _db.BookDetailsFromView.FirstOrDefault();
+            var viewList3 = _db.BookDetailsFromView.Where(u => u.Price > 500);
+
+            // RAW SQL - how to pass SQL Raw and SQl Raw with parameters
+            // for both you must always use *, you can't request specific columns, this is a limitation.
+
+            var bookRaw = _db.Books.FromSqlRaw("Select * from dbo.books").ToList();
+            // if you have parameters to pass you use 
+            var id = 1;
+            var bookTemp1 = _db.Books.FromSqlInterpolated($"Select * from dbo.books where Book_Id={id}").ToList();
+
+
+            // STORED PROCEDURES
+            var anotherId = 2;
+            var bookStoredProcedure = _db.Books.FromSqlInterpolated($" EXEC dbo.getAllBookDetails {id}").ToList();
+
+            // .NET 5 ONLY:
+            // You can filter with Where and OrderBy and so on, collections that are included in classes
+            // here BookAuthors is a collection inside Books
+            var BookFilter1 = _db.Books.Include(e => e.BookAuthors.Where(p => p.Author_Id == 1)).ToList();
+            var BookFilter2 = _db.Books.Include(e => e.BookAuthors.OrderByDescending
+            (p => p.Author_Id == 1)).Take(2).ToList();
 
             return RedirectToAction(nameof(Index));
+
         }
     }
 }
