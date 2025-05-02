@@ -1,6 +1,8 @@
 # DotNetMastery's EF Core (MVC) Complete Demonstration Project
-# A Complete MVC Solution using EF Capabilities
 
+WizLib is a comprehensive, production-grade ASP.NET Core MVC project that thoroughly demonstrates the capabilities of Entity Framework Core (EF Core) in a layered architecture. Built using .NET 6 and EF Core, this application is the full implementation of DotNetMastery’s WizLibSolution, serving as an educational and practical showcase of core, intermediate, and advanced EF Core concepts. Structured into a clear 3-tier architecture—comprising the presentation layer (controllers/views), a data access layer with migrations and DbContext configuration, and a domain layer of models and view models—this solution illustrates everything from basic CRUD to many-to-many relationships, eager loading, raw SQL execution, and more.
+
+# A Complete MVC Solution using EF Capabilities
 This project is my actual full implementation of DotNetMastery's WizLibSolution.
 
 This is a 3-tier Solution consisting of projects comprising
